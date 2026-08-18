@@ -3,12 +3,15 @@ import Blue_Moon_Analytics.clases.Plantilla;
 import Blue_Moon_Analytics.clases.Posicion;
 import Blue_Moon_Analytics.clases.Traspaso;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class main {
     public static void main(String[] args) {
         Plantilla miClub = new Plantilla(15_000_000);
 
-        // 1. Agregar jugador base
+        /*// 1. Agregar jugador base
         Jugador canterano = new Jugador("Lucas Romero", 10000, "libre",12, Posicion.ARQUERO,false,1000000);
         miClub.agregarJugador(canterano);
 
@@ -24,7 +27,12 @@ public class main {
         // Estado final
         System.out.println("\n--- Resumen Final ---");
         System.out.println("Presupuesto actual: $" + miClub.getPresupuesto());
-        System.out.println("Jugadores en plantilla: " + miClub.getJugadores().values());
+        System.out.println("Jugadores en plantilla: " + miClub.getJugadores().values());*/
+
+        ArrayList<String> temporada = new ArrayList<>(List.of("E", "G", "P","E", "G", "P","E", "P"));
+
+        System.out.println("el club termino la temporada con "+ miClub.partidosJugados(temporada)+" putos");
+
     }
 }
 

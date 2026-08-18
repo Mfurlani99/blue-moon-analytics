@@ -23,6 +23,8 @@ public class Plantilla {
     // Conjunto que almacena los nombres registrados oficialmente; evita duplicados automáticamente
     private Set<String> nomina;
 
+    private List partidos = new ArrayList();
+
     // --- CONSTRUCTOR ---
 
     /**
@@ -36,6 +38,27 @@ public class Plantilla {
     }
 
     // --- MÉTODOS DE GESTIÓN INTERNA ---
+
+
+    public int partidosJugados(ArrayList<String> partidos){
+        int puntos = 0;
+        Iterator<String> it = partidos.iterator();
+
+        while (it.hasNext()){
+            String partido = it.next();
+           if (partido.equals("G")){
+              puntos +=3;
+           }if (partido.equals("E")){
+               puntos +=1;
+            }else{
+               puntos = puntos;
+            }
+
+        }
+        return puntos;
+    }
+
+
 
     /**
      * Da de alta a un jugador directamente (ej. canteranos o carga inicial).
