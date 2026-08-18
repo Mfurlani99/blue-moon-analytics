@@ -1,0 +1,31 @@
+import Blue_Moon_Analytics.clases.Jugador;
+import Blue_Moon_Analytics.clases.Plantilla;
+import Blue_Moon_Analytics.clases.Posicion;
+import Blue_Moon_Analytics.clases.Traspaso;
+
+
+public class main {
+    public static void main(String[] args) {
+        Plantilla miClub = new Plantilla(15_000_000);
+
+        // 1. Agregar jugador base
+        Jugador canterano = new Jugador("Lucas Romero", 10000, "libre",12, Posicion.ARQUERO,false,1000000);
+        miClub.agregarJugador(canterano);
+
+        // 2. Comprar un jugador usando Traspaso<Jugador>
+        Jugador refuerzo = new Jugador("matias Romero", 10000, "libre",23, Posicion.DELANTERO,false,1000000);
+        Traspaso<Jugador> compra = new Traspaso<>(refuerzo, "Club Atlético", "Mi Club");
+        miClub.comprarJugador(compra);
+
+        // 3. Vender un jugador usando Traspaso<Jugador>
+        Traspaso<Jugador> venta = new Traspaso<>(canterano, "Mi Club", "Liga Extranjera");
+        miClub.venderJugador(venta, 4_500_000);
+
+        // Estado final
+        System.out.println("\n--- Resumen Final ---");
+        System.out.println("Presupuesto actual: $" + miClub.getPresupuesto());
+        System.out.println("Jugadores en plantilla: " + miClub.getJugadores().values());
+    }
+}
+
+
