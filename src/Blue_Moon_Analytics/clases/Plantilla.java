@@ -25,6 +25,8 @@ public class Plantilla {
 
     private List partidos = new ArrayList();
 
+    Enfermeria enfer = new Enfermeria();
+
     // --- CONSTRUCTOR ---
 
     /**
@@ -38,6 +40,10 @@ public class Plantilla {
     }
 
     // --- MÉTODOS DE GESTIÓN INTERNA ---
+
+
+
+
 
 
     public int partidosJugados(ArrayList<String> partidos){
@@ -72,6 +78,8 @@ public class Plantilla {
         nomina.add(jugador.getNombre());
 
         System.out.println("Jugador agregado a la plantilla: " + jugador.getNombre());
+
+        Enfermeria.procesarJugadores(jugadores);
     }
 
     // --- OPERACIONES DE MERCADO (TRANSFERENCIAS) ---

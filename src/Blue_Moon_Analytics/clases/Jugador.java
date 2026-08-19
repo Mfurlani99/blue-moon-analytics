@@ -8,13 +8,15 @@ public class Jugador extends IntegrantesClub{
   private Posicion posicion;
   private boolean lesion;
   private int valor;
+  private Gravedad gravedad;
 
-    public Jugador(String nombre, int sueldo, String club, int dorsal, Posicion posicion, boolean lesion, int valor) {
+    public Jugador(String nombre, int sueldo, String club, int dorsal, Posicion posicion, boolean lesion, int valor, Gravedad gravedad) {
         super(nombre, sueldo, club);
         this.dorsal = dorsal;
         this.posicion = posicion;
         this.lesion = lesion;
         this.valor = valor;
+        this.gravedad = gravedad;
     }
 
     @Override
@@ -60,11 +62,21 @@ public class Jugador extends IntegrantesClub{
         this.lesion = lesion;
     }
 
+
+
     public int getValor() {
         return valor;
     }
 
     public void setValor(int valor) {
         this.valor = valor;
+    }
+
+    public Gravedad getGravedad() {
+        return gravedad;
+    }
+
+    public void setGravedad(Gravedad gravedad) {
+        this.gravedad = gravedad;
     }
 }
