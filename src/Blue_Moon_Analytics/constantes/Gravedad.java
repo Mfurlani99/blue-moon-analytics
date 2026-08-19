@@ -1,9 +1,10 @@
-package Blue_Moon_Analytics.clases;
+package Blue_Moon_Analytics.constantes;
 
 public enum Gravedad {
     GRAVE(1),
     LEBE(2),
-    MEDIA(3);
+    MEDIA(3),
+    NULA(4);
     private final int codigo;
 
     Gravedad(int codigo) {

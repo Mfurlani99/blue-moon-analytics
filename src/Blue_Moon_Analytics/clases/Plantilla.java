@@ -2,6 +2,13 @@
 package Blue_Moon_Analytics.clases;
 
 // Importación del framework de colecciones de Java (Map, Set, HashMap, HashSet)
+import Blue_Moon_Analytics.errores.DorsalOcupadoException;
+import Blue_Moon_Analytics.errores.PresupuestoExcedidoException;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -18,7 +25,7 @@ public class Plantilla {
 
     // Mapa clave-valor: Permite búsquedas instantáneas O(1) usando el nombre como clave
     // Clave: Nombre del jugador (String) | Valor: Objeto completo (Jugador)
-    private Map<String, Jugador> jugadores;
+    private static Map<String, Jugador> jugadores;
 
     // Conjunto que almacena los nombres registrados oficialmente; evita duplicados automáticamente
     private Set<String> nomina;
@@ -42,9 +49,27 @@ public class Plantilla {
     // --- MÉTODOS DE GESTIÓN INTERNA ---
 
 
+    public static boolean buscarPorDorsal( int dorsalBuscado) {
+        for (Jugador j : jugadores.values()) {
+            if (j.getDorsal() == dorsalBuscado) { // Compara únicamente el campo específico
+                return true; // Retorna el objeto encontrado
+            }
+        }
+        return false; // Si no hubo coincidencias
+    }
 
 
-
+    public void contrato(File archivo) {
+        // El recurso AutoCloseable se declara e inicializa dentro del try(...)
+        try (BufferedReader lector = new BufferedReader(new FileReader(archivo))) {
+            String linea;
+            while ((linea = lector.readLine()) != null) {
+                System.out.println(linea);
+            }
+        } catch (IOException e) {
+            System.err.println("Error al procesar el archivo: " + e.getMessage());
+        }
+    }
 
     public int partidosJugados(ArrayList<String> partidos){
         int puntos = 0;
@@ -91,15 +116,20 @@ public class Plantilla {
      * 3. Ejecuta el traspaso (cambia el estado interno del objeto Traspaso a completado).
      * 4. Descuenta el dinero y registra al jugador en las colecciones.
      */
-    public boolean comprarJugador(Traspaso<Jugador> traspaso) {
+    public boolean comprarJugador(Traspaso<Jugador> traspaso) throws PresupuestoExcedidoException{
         // Extrae el objeto encapsulado dentro del traspaso
         Jugador jugador = traspaso.getElemento();
         int costo = jugador.getValor();
 
+
+            if (buscarPorDorsal(jugador.getDorsal())) throw new DorsalOcupadoException("el dorsal esta ocupado");
+
+
         // VALIDACIÓN 1: ¿Alcanza el dinero disponible?
         if (costo > presupuesto) {
             System.out.println("Error: Presupuesto insuficiente para comprar a " + jugador.getNombre());
-            return false; // Corta la ejecución si no hay fondos
+            throw new PresupuestoExcedidoException("\"Error: Presupuesto insuficiente para comprar a \"" + jugador.getNombre());
+            // Corta la ejecución si no hay fondos
         }
 
         // VALIDACIÓN 2: Ejecución del traspaso

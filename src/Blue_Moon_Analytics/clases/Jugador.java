@@ -1,5 +1,9 @@
 package Blue_Moon_Analytics.clases;
 
+import Blue_Moon_Analytics.constantes.Gravedad;
+import Blue_Moon_Analytics.constantes.Posicion;
+import Blue_Moon_Analytics.errores.DorsalOcupadoException;
+
 import java.util.Objects;
 
 public class Jugador extends IntegrantesClub{
@@ -20,10 +24,11 @@ public class Jugador extends IntegrantesClub{
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o){
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Jugador jugador = (Jugador) o;
+        if (dorsal == jugador.dorsal) throw new DorsalOcupadoException("el dorsal esta ocupado");
         // Dos jugadores son iguales solo si coinciden nombre Y dorsal
         return dorsal == jugador.dorsal && Objects.equals(nombre, jugador.nombre);
     }

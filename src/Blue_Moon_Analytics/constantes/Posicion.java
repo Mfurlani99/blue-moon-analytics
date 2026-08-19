@@ -1,4 +1,4 @@
-package Blue_Moon_Analytics.clases;
+package Blue_Moon_Analytics.constantes;
 
 public enum Posicion {
     ARQUERO,
